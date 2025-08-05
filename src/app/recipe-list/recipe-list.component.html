@@ -1,0 +1,18 @@
+<div class="recipe-list">
+  <mat-toolbar color="primary">
+    <span>Поваренная книга</span>
+  </mat-toolbar>
+
+  <div *ngIf="recipes.length === 0" class="empty-list">
+    <mat-card>No recipes available</mat-card>
+  </div>
+
+  <mat-list>
+    <mat-list-item *ngFor="let recipe of recipes">
+      <mat-icon mat-list-icon>recipe</mat-icon>
+      <div mat-line>{{ recipe.title }}</div>
+      <div mat-line>{{ recipe.date | date:'short' }}</div>
+      <img *ngIf="recipe.imageUrl" [src]="recipe.imageUrl" alt="Recipe image" class="recipe-image" />
+    </mat-list-item>
+  </mat-list>
+</div>

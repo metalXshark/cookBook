@@ -1,0 +1,15 @@
+.recipe-list {
+  padding: 16px;
+}
+
+.empty-list {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.recipe-image {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  margin-left: 10px;
+}
