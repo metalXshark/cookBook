@@ -1,18 +1,65 @@
 <div class="recipe-list">
-  <mat-toolbar color="primary">
+  <mat-toolbar>
     <span>Поваренная книга</span>
+    <span class="spacer"></span>
+
+    <button mat-stroked-button (click)="openAuthDialog()" class="auth-button">
+      <mat-icon>account_circle</mat-icon>
+      {{ (authService.currentUser$ | async) ? 'Профиль' : 'Войти' }}
+    </button>
+
+    <button mat-stroked-button (click)="createNewRecipe()" class="new-recipe-button">
+      <mat-icon>add</mat-icon> Новый рецепт
+    </button>
   </mat-toolbar>
 
-  <div *ngIf="recipes.length === 0" class="empty-list">
-    <mat-card>No recipes available</mat-card>
+  <div *ngIf="(recipes$ | async)?.length === 0" class="empty-list">
+    <mat-card>Рецептов пока нет</mat-card>
   </div>
 
   <mat-list>
-    <mat-list-item *ngFor="let recipe of recipes">
-      <mat-icon mat-list-icon>recipe</mat-icon>
-      <div mat-line>{{ recipe.title }}</div>
-      <div mat-line>{{ recipe.date | date:'short' }}</div>
-      <img *ngIf="recipe.imageUrl" [src]="recipe.imageUrl" alt="Recipe image" class="recipe-image" />
+    <mat-list-item *ngFor="let recipe of recipes$ | async" class="recipe-item">
+      <div class="recipe-content">
+        <!-- Левая часть - информация и иконки -->
+        <div class="recipe-info" (click)="openRecipeDetails(recipe)">
+          <mat-icon mat-list-icon>restaurant_menu</mat-icon>
+          <div class="recipe-text">
+            <div class="recipe-header">
+              <span class="recipe-title">{{ recipe.title }}</span>
+              <div class="recipe-meta">
+              <span class="recipe-author-date">
+                Автор: {{ recipe.authorName || 'Неизвестный автор' }} | {{ recipe.date | date:'dd.MM.yyyy' }}
+              </span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Правая часть - миниатюра и кнопки -->
+        <div class="recipe-right-section">
+          <!-- Миниатюра справа -->
+          <div class="recipe-thumbnail" *ngIf="recipe.hasImage && getRecipeImage(recipe.id!)"
+               (click)="openRecipeDetails(recipe)">
+            <img [src]="getRecipeImage(recipe.id!)" alt="Миниатюра рецепта">
+          </div>
+
+          <!-- Кнопки действий справа -->
+          <div class="recipe-actions">
+            <button mat-icon-button *ngIf="isAuthor(recipe) | async" (click)="editRecipe(recipe.id!, $event)">
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button mat-icon-button *ngIf="isAuthor(recipe) | async" (click)="deleteRecipe(recipe.id!, $event)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+        </div>
+      </div>
     </mat-list-item>
   </mat-list>
+
+  <app-recipe-details
+    [recipe]="selectedRecipe"
+    *ngIf="selectedRecipe"
+    (closeEvent)="closeRecipeDetails()">
+  </app-recipe-details>
 </div>

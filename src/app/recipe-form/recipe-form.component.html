@@ -1,0 +1,75 @@
+<form [formGroup]="recipeForm" (ngSubmit)="onSubmit()" class="recipe-form">
+  <mat-card class="form-card">
+    <mat-card-header>
+      <mat-card-title>{{ isEditMode ? 'Редактирование рецепта' : 'Новый рецепт' }}</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+      <div class="image-upload">
+        <input type="file" accept="image/*" (change)="onFileSelected($event)" #fileInput style="display: none">
+
+        <div class="image-preview" *ngIf="getImage()">
+          <img [src]="getImage()" alt="Превью рецепта">
+          <button mat-icon-button color="warn" (click)="removeImage()" type="button">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+
+        <button mat-stroked-button type="button" (click)="fileInput.click()" *ngIf="!getImage()">
+          <mat-icon>add_photo_alternate</mat-icon> Добавить изображение
+        </button>
+      </div>
+
+      <!-- Остальная форма -->
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Название рецепта</mat-label>
+        <input matInput formControlName="title" required>
+      </mat-form-field>
+
+      <div formArrayName="ingredients" class="ingredients-container">
+        <div *ngFor="let ingredient of ingredients.controls; let i = index" [formGroupName]="i" class="ingredient-row">
+          <div class="ingredient-fields">
+            <mat-form-field appearance="outline">
+              <mat-label>Ингредиент</mat-label>
+              <input matInput formControlName="name" required>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="amount-field">
+              <mat-label>Количество</mat-label>
+              <input matInput type="number" formControlName="amount" required>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="unit-field">
+              <mat-label>Ед. измерения</mat-label>
+              <mat-select formControlName="unit" required>
+                <mat-option *ngFor="let unit of units" [value]="unit">{{unit}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+          <button mat-icon-button color="warn" type="button" (click)="removeIngredient(i)" *ngIf="ingredients.length > 1">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+      </div>
+
+      <button mat-stroked-button type="button" (click)="addIngredient()" class="add-button">
+        <mat-icon>add</mat-icon> Добавить ингредиент
+      </button>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Описание приготовления</mat-label>
+        <textarea matInput formControlName="description" rows="5" required></textarea>
+      </mat-form-field>
+    </mat-card-content>
+
+    <mat-card-actions class="actions">
+      <button mat-stroked-button type="button" routerLink="/" class="cancel-button">
+        Отмена
+      </button>
+      <button mat-raised-button color="primary" type="submit" [disabled]="!recipeForm.valid" class="submit-button">
+        {{ isEditMode ? 'Обновить рецепт' : 'Сохранить рецепт' }}
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</form>

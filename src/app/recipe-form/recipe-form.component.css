@@ -1,0 +1,121 @@
+.recipe-form {
+  display: flex;
+  justify-content: center;
+  padding: 24px;
+}
+
+.form-card {
+  width: 100%;
+  max-width: 800px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+  border-radius: 8px;
+}
+
+.full-width {
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+.ingredients-container {
+  margin-bottom: 16px;
+}
+
+.ingredient-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
+  gap: 12px;
+}
+
+.ingredient-fields {
+  display: flex;
+  flex-grow: 1;
+  gap: 12px;
+}
+
+.amount-field {
+  width: 120px;
+}
+
+.unit-field {
+  width: 140px;
+}
+
+.add-button {
+  margin-bottom: 24px;
+}
+
+.upload-button {
+  margin-right: 16px;
+}
+
+.image-name {
+  color: #666;
+  font-size: 0.9em;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  padding: 16px;
+}
+
+.cancel-button {
+  margin-right: auto;
+}
+
+.submit-button {
+  min-width: 120px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .ingredient-fields {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .amount-field, .unit-field {
+    width: 100%;
+  }
+
+  .ingredient-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+.image-upload {
+  margin-bottom: 20px;
+}
+
+.image-preview {
+  position: relative;
+  width: 100%;
+  max-height: 300px;
+  overflow: hidden;
+  border-radius: 4px;
+  margin-bottom: 10px;
+}
+
+.image-preview img {
+  width: 100%;
+  height: auto;
+  display: block;
+  max-height: 300px;
+  object-fit: contain;
+}
+
+.image-preview button {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+}
+
+.form-card {
+  max-width: 800px;
+  margin: 0 auto;
+}
+

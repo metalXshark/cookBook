@@ -1,0 +1,47 @@
+<div class="auth-dialog">
+  <button mat-icon-button class="close-button" (click)="dialogRef.close()">
+    <mat-icon>close</mat-icon>
+  </button>
+
+  <div *ngIf="currentUser; else authFormTemplate">
+    <h2>Ваш профиль</h2>
+    <div class="user-info">
+      <p><strong>Имя:</strong> {{ currentUser.displayName || 'Не указано' }}</p>
+      <p><strong>Email:</strong> {{ currentUser.email }}</p>
+    </div>
+    <button mat-raised-button color="warn" (click)="signOut()" class="logout-btn">
+      Выйти
+    </button>
+  </div>
+
+  <ng-template #authFormTemplate>
+    <h2>{{ isLoginMode ? 'Вход' : 'Регистрация' }}</h2>
+    <form [formGroup]="authForm" (ngSubmit)="onSubmit()">
+      <mat-form-field appearance="outline" *ngIf="!isLoginMode">
+        <mat-label>Имя пользователя</mat-label>
+        <input matInput formControlName="displayName" required>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Email</mat-label>
+        <input matInput type="email" formControlName="email" required>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Пароль</mat-label>
+        <input matInput type="password" formControlName="password" required>
+        <mat-hint *ngIf="!isLoginMode">Минимум 6 символов</mat-hint>
+      </mat-form-field>
+
+      <div class="actions">
+        <button mat-stroked-button type="button" (click)="switchMode()">
+          {{ isLoginMode ? 'Нет аккаунта? Зарегистрироваться' : 'Уже есть аккаунт? Войти' }}
+        </button>
+
+        <button mat-raised-button color="primary" type="submit" [disabled]="authForm.invalid">
+          {{ isLoginMode ? 'Войти' : 'Зарегистрироваться' }}
+        </button>
+      </div>
+    </form>
+  </ng-template>
+</div>
