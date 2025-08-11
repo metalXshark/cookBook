@@ -32,6 +32,16 @@
 📌 Валидация форм
 Проверка обязательных полей и корректности данных
 
-![Пример интерфейса]()
 📌 Адаптивный дизайн
 Удобное отображение на разных устройствах
+
+![Пример интерфейса](https://github.com/metalXshark/cookBook/blob/master/screenshots/1.png)
+![Пример интерфейса](https://github.com/metalXshark/cookBook/blob/master/screenshots/2.png)
+![Пример интерфейса](https://github.com/metalXshark/cookBook/blob/master/screenshots/3.png)
+![Пример интерфейса](https://github.com/metalXshark/cookBook/blob/master/screenshots/4.png)
+![Пример интерфейса](https://github.com/metalXshark/cookBook/blob/master/screenshots/5.png)
+![Пример интерфейса](https://github.com/metalXshark/cookBook/blob/master/screenshots/6.png)
+![Пример интерфейса](https://github.com/metalXshark/cookBook/blob/master/screenshots/7.png)
+![Пример интерфейса](https://github.com/metalXshark/cookBook/blob/master/screenshots/8.png)
+![Пример интерфейса](https://github.com/metalXshark/cookBook/blob/master/screenshots/9.png)
+![Пример интерфейса](https://github.com/metalXshark/cookBook/blob/master/screenshots/10.png)
